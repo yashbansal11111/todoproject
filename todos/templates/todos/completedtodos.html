@@ -1,0 +1,47 @@
+<h1>List of Completed Todos for - </h1>
+{% if user.is_authenticated %}
+Logged in User " {{ user.username }} "
+{% endif %}
+
+{% block content %}
+
+<ul>
+    {% for todo in todos %}
+    <li>
+        <a href = "{% url 'viewtodo' todo.id %}">
+        {% if todo.Important %}<b>{% endif %}
+        Title - {{ todo.Title }}
+        </b>
+        </a>
+    </li>
+
+    <li>Important - {{ todo.Important }}</li>
+
+    <li>Memo - {{ todo.memo }}</li>
+    <li>DateCompleted - {{ todo.datecompleted }}</li>
+
+    <br>
+    <br>
+
+    {% endfor %}
+
+</ul>
+
+Create a new Todo - 
+<button type="submit"><a href = "{% url 'createtodo' %}">Create Todo (Go to creation Page)</a></button>
+<br>
+<br>
+
+View Open Todos -
+<button type="submit"><a href = "{% url 'currenttodos' %}">View Open Todos</a></button> 
+
+<br>
+<br>
+Want to sign in with a Different User
+<form action="{% url 'logoutuser' %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">logout</button>
+</form>
+
+{% endblock %}
+

@@ -1,0 +1,19 @@
+{% if user.is_authenticated %}
+Logged in User " {{ user.username }} "
+{% endif %}
+
+{% block content %}
+
+<h1>Create your TODO</h1>
+
+<h2>{{ error }}</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ todoform.as_p }}
+    <!--.as_p wraps most of the information on webpage into paragraph tags to make it look more meaningful-->
+    <button type="submit">Create</button>
+</form>
+
+
+{% endblock %}
